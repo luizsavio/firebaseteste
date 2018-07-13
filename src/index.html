@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <title>Ionic App</title>
@@ -30,11 +31,35 @@
   <link href="build/main.css" rel="stylesheet">
 
 </head>
+
 <body>
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-functions.js"></script>
 
+  <script>
+    var config = {
+      apiKey: "AIzaSyD1DKdKRfefkay1ibdXC9pN7TlTkjKmXVI",
+      authDomain: "primeiroprojetofirebase-a9343.firebaseapp.com",
+      databaseURL: "https://primeiroprojetofirebase-a9343.firebaseio.com",
+      projectId: "primeiroprojetofirebase-a9343",
+      storageBucket: "primeiroprojetofirebase-a9343.appspot.com",
+      messagingSenderId: "812575645923"
+    };
+    firebase.initializeApp(config);
+    //var db = firebase.firestore();
+    //var database = firebase.database();
+    var auth = firebase.auth();
+    var db = firebase.firestore();
+    var firebase = firebase;
+    
+  </script>
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
 
@@ -46,4 +71,5 @@
   <script src="build/main.js"></script>
 
 </body>
+
 </html>
