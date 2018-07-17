@@ -1,36 +1,60 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-declare var auth;
+import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage{
-  public meusboloes: Object[];
+export class HomePage {
+  public meusboloes;
 
-  constructor(public navCtrl: NavController,
-  public authservice: AuthServiceProvider) {
-    this.meusboloes = [
-      {nomeGravida: 'Carla Braga de Souza', dataInicio: '11/07/2018'},
-      {nomeGravida: 'Bruna Marquezine de Souza', dataInicio: '11/07/2018'},
-      {nomeGravida: 'Alejandra da Silva', dataInicio: '11/07/2018'},
-      {nomeGravida: 'Joana Bragantino', dataInicio: '11/07/2018'},
-      {nomeGravida: 'Silvana Gabriel Souza', dataInicio: '11/07/2018'},
-    ];
-    /*var user = authservice.currentUser;
-
-    user.updateProfile({
-      displayName: "Luiz Savio S Moraes"
-    }).then(function() {
-      console.log("nome do usuario alterado")
-    }).catch(function(error) {
-      console.log("nome não foi alterado:", error)
-    });*/
+  constructor(public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController,
+    public authservice: AuthServiceProvider,
+    public fireservice: FirestoreServiceProvider) {
+    /*this.meusboloes = {
+        'meusboloes': [
+      { nomeGravida: 'Carla Braga de Souza', dataInicio: '11/07/2018'},
+      { nomeGravida: 'Carla Braga de Souza', dataInicio: '11/07/2018'}
+    ]
+      };*/
+  //console.log('vindo do boloes estativo', this.meusboloes)
   }
 
-  ionViewDidLoad(){
-      
+  carregarBoloes(){
+    this.fireservice.receberTodosDocumentosColecao('bolao')
+    .then((doc) => {
+      this.meusboloes = doc;
+      //console.log('vindo do doc de listar tudo:', doc);
+    })
+  }
+
+  ionViewDidLoad() {
+    /*this.fireservice.gravarDadosGerarIdAutomatico('bolao', this.meusboloes.meusboloes[0])
+      .then(
+        () => this.presentLoading('cadastrado'),
+        (error) => this.presentLoading(error.message)
+    );*/
+   this.carregarBoloes();
+  }
+
+  presentLoading(message) {
+    const loading = this.loadingCtrl.create({
+      duration: 500
+    });
+
+    loading.onDidDismiss(() => {
+      const alert = this.alertCtrl.create({
+        title: 'Alerta',
+        subTitle: message,
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    });
+
+    loading.present();
   }
 }

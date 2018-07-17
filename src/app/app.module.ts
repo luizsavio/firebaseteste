@@ -12,6 +12,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { FirestoreServiceProvider } from '../providers/firestore-service/firestore-service';
 //import { AngularFireAuth } from 'angularfire2/auth';
 //import { AuthServiceFire2Provider } from '../providers/auth-service-fire2/auth-service-fire2';
 
@@ -42,6 +43,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
+    FirestoreServiceProvider,
     //AngularFireAuth,
     //AuthServiceFire2Provider
     /*AuthProvider,

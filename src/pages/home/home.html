@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Meus bolões
+      Home
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -13,4 +13,7 @@
           <p> Data: {{ bolao.dataInicio }} </p>
         </ion-item>
       </ion-list>
+      <ion-fab right bottom style="margin-right: 1%; margin-bottom: 1%">
+        <button ion-fab color="danger" (click)="add()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
 </ion-content>
