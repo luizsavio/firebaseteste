@@ -11,7 +11,7 @@ declare var firebase;
 @Injectable()
 export class AuthServiceProvider {
 
-  authState: any;
+  authState: any = null;
 
   constructor() {
 
@@ -91,12 +91,19 @@ export class AuthServiceProvider {
   }
 
   signOut(){
-    auth.signOut();
+    return new Promise((resolve, reject) => {
+      auth.signOut().then(
+        () => {
+          resolve();
+          this.authState = null;
+        },
+        () => reject()
+      )
+    });
+    
   }
 
   get currentUser(): any {
-    var user = auth.currentUser;
-    this.authState = user
     return (this.authState !== null) ? this.authState : null;
   }
 

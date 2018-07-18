@@ -13,6 +13,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { FirestoreServiceProvider } from '../providers/firestore-service/firestore-service';
+import { ListaBolaoPage } from '../pages/lista-bolao/lista-bolao';
+import { CriarBolaoPage } from '../pages/criar-bolao/criar-bolao';
 //import { AngularFireAuth } from 'angularfire2/auth';
 //import { AuthServiceFire2Provider } from '../providers/auth-service-fire2/auth-service-fire2';
 
@@ -23,7 +25,9 @@ import { FirestoreServiceProvider } from '../providers/firestore-service/firesto
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ListaBolaoPage,
+    CriarBolaoPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { FirestoreServiceProvider } from '../providers/firestore-service/firesto
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ListaBolaoPage,
+    CriarBolaoPage
   ],
   providers: [
     StatusBar,

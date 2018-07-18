@@ -1,1 +1,30 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!--<ion-nav [root]="rootPage"></ion-nav> -->
+<ion-split-pane>
+    <ion-menu [content]="conteudo" *ngIf="UsuarioLogado">
+        <ion-content>
+                <ion-item id="cabecalho-menu" class="cabecalho-menu">
+                        <div>
+                            <ion-avatar item-start>
+                                <img [src]="avatar">
+                            </ion-avatar>
+                        </div>
+                        <h2>Luiz Savio</h2>
+                        <p>luizsavio2009@hotmail.com</p>
+                    </ion-item>
+        
+            <ion-list>
+                <button ion-item menuClose *ngFor="let pagina of paginas"
+                (click)="irParaPagina(pagina.component)">
+                    <ion-icon [name]="pagina.icone" item-left></ion-icon>
+                    {{ pagina.titulo }}
+                </button>
+                <button ion-item menuClose (click)="sair()">
+                    <ion-icon name="Calendar" item-left></ion-icon>
+                    Sair
+                </button>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    
+    <ion-nav [root]="rootPage" #conteudo swipeBackEnabled="false" main></ion-nav>
+    </ion-split-pane>
