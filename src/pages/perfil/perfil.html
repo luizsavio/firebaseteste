@@ -27,14 +27,14 @@
     </ion-item>
     <ion-item>
       <ion-icon name="calendar" item-left></ion-icon>
-      <p>Data de Criação: {{ UsuarioLogado?.metadata.creationTime }}</p>
+      <p>Data de Criação: {{ UsuarioLogado?.metadata.creationTime | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
     </ion-item>
     <ion-item>
       <ion-icon name="at" item-left></ion-icon>
       <p>Email Verificado: {{ UsuarioLogado?.emailVerified ? 'Sim' : 'Não'}}</p>
     </ion-item>
     <ion-item>
-      <button ion-button color="danger" outline class="btn-excluir-conta">Excluir Conta</button>
+      <button ion-button color="danger" outline class="btn-excluir-conta" (click)="tiraFoto()">Excluir Conta</button>
     </ion-item>
   </ion-card>
 </ion-content>

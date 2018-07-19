@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
+import { CriarBolaoPage } from '../criar-bolao/criar-bolao';
 
 /**
  * Generated class for the ListaBolaoPage page.
@@ -14,12 +17,52 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'lista-bolao.html',
 })
 export class ListaBolaoPage {
+  public meusboloes;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public loadingCtrl: LoadingController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public authservice: AuthServiceProvider,
+    public fireservice: FirestoreServiceProvider) {
+  }
+
+  criarBolao(){
+    this.navCtrl.push(CriarBolaoPage);
+  }
+
+  carregarBoloes(){
+    this.fireservice.receberTodosDocumentosColecao('bolao')
+    .then((doc) => {
+      this.meusboloes = doc;
+      //console.log('vindo do doc de listar tudo:', doc);
+    })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaBolaoPage');
+    /*this.fireservice.gravarDadosGerarIdAutomatico('bolao', this.meusboloes.meusboloes[0])
+      .then(
+        () => this.presentLoading('cadastrado'),
+        (error) => this.presentLoading(error.message)
+    );*/
+   this.carregarBoloes();
+  }
+
+  presentLoading(message) {
+    const loading = this.loadingCtrl.create({
+      duration: 500
+    });
+
+    loading.onDidDismiss(() => {
+      const alert = this.alertCtrl.create({
+        title: 'Alerta',
+        subTitle: message,
+        buttons: ['Fechar']
+      });
+      alert.present();
+    });
+
+    loading.present();
   }
 
 }

@@ -6,16 +6,16 @@
         <!-- <img class="logo" src="assets/img/logo/logo-pr.png" /> -->
         <ion-slides class="text-slider" autoplay="2000">
           <ion-slide>
-            <h3> Really nice stuff </h3>
+            <h3> Coisas muito legais </h3>
           </ion-slide>
           <ion-slide>
             <img src="assets/img/misc/emoji.png" />
           </ion-slide>
           <ion-slide>
-            <h3> Unique experiences given to you for just a couple bucks </h3>
+            <h3> Experiências únicas dadas a você por apenas alguns dólares </h3>
           </ion-slide>
           <ion-slide>
-            <h3> Share what you love </h3>
+            <h3> Compartilhe o que voce ama. </h3>
           </ion-slide>
         </ion-slides>
         <!-- Botões iniciais -->
@@ -42,7 +42,7 @@
               </ion-item>
 
               <ion-item>
-                <ion-label floating>Password</ion-label>
+                <ion-label floating>Senha</ion-label>
                 <ion-input type="password" placeholder="" formControlName="password"></ion-input>
               </ion-item>
 
@@ -52,26 +52,26 @@
                   <ion-icon name="logo-google" item-left></ion-icon>
                   &nbsp; GOOGLE
               </button>
-              <button ion-button clear (click)="slideNext()" color="light" class="forgot-button">FORGOT PASSWORD?</button>
+              <button ion-button clear (click)="slideNext()" color="light" class="forgot-button">ESQUECEU SUA SENHA?</button>
             </div>
-            <button ion-button clear (click)="goToSignup()" class="slide-button position-bottom">GO TO SIGNUP
+            <button ion-button clear (click)="goToSignup()" class="slide-button position-bottom">CADASTRAR NOVA CONTA
               <ion-icon name="arrow-down"></ion-icon>
             </button>
           
         </ion-slide>
         <!-- Resetar senha -->
         <ion-slide class="swiper-no-swiping">
-
+          <h3>REDEFINIR SENHA</h3>
           <div style="padding: 20% 32px 32px 32px">
             <form (ngSubmit)="resetPassword()" [formGroup]="formReset">
               <ion-item>
                 <ion-label floating>E-mail</ion-label>
                 <ion-input type="text" formControlName="emailReset"></ion-input>
               </ion-item>
-              <button ion-button block round type="submit" color="light" [disabled]="!formReset.valid" class="login-button">RESET PASSWORD</button>
+              <button ion-button block round type="submit" color="light" [disabled]="!formReset.valid" class="login-button">ENVIAR</button>
             </form>
             <button ion-button clear (click)="slidePrevious()" color="light" class="goback-button">
-              <ion-icon name="arrow-back"></ion-icon> GO BACK</button>
+              <ion-icon name="arrow-back"></ion-icon> VOLTAR</button>
           </div>
 
         </ion-slide>
@@ -80,13 +80,13 @@
     <!-- CAdastro de conta -->
     <ion-slide class="zoom swiper-no-swiping">
       <button ion-button clear (click)="goToLogin()" class="slide-button">
-        GO TO LOGIN
+        IR PARA O LOGIN
         <ion-icon name="arrow-up"></ion-icon>
       </button>
       <form (ngSubmit)="signUp()" [formGroup]="formSignup">
         <div style="padding: 32px">
           <ion-item>
-          <ion-label floating>Username</ion-label>
+          <ion-label floating>Nome do Usuário</ion-label>
           <ion-input type="text" formControlName="nameSignUp"></ion-input>
         </ion-item>
           <ion-item>
@@ -94,11 +94,11 @@
             <ion-input type="text" placeholder="" formControlName="emailSignUp"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label floating>Password</ion-label>
+            <ion-label floating>Senha</ion-label>
             <ion-input type="password" placeholder="" formControlName="passwordSignUp"></ion-input>
           </ion-item>
           <ion-item class="margin-bottom">
-            <ion-label floating>Confirm Password</ion-label>
+            <ion-label floating>Confirmar Senha</ion-label>
             <ion-input type="password" formControlName="passwordSignUpConfirm"></ion-input>
           </ion-item>
           <button ion-button block round type="submit" color="light" class="login-button" [disabled]="!formSignup.valid">Cadastrar</button>

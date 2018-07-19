@@ -102,8 +102,28 @@ export class FirestoreServiceProvider {
         reject(error);
         console.log("Error getting documents: ", error);
       });
-    })
+    });
+  }
 
+  receberVariosDocumentosFiltrado(colecao: string, campoDocumento: string, condicao: string, valor: string){
+    this.colecaoLista = new Array();
+    return new Promise((resolve, reject) =>{
+      db.collection(colecao).where(campoDocumento, condicao, valor)
+      .get()
+      .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            var objeto = doc.data();
+            this.colecaoLista.push(objeto);
+            resolve(this.colecaoLista);
+             // console.log(doc.id, " => ","Vindo da consulta", doc.data());
+          });
+      })
+      .catch(function(error) {
+        reject(error.message);
+          console.log("Error getting documents: ", error);
+      });
+    });
+    
   }
 
 }

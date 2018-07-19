@@ -3,7 +3,9 @@ import { IonicPage, NavController, /*NavParams,*/ LoadingController, AlertContro
 import { HomePage } from '../home/home';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ListaBolaoPage } from '../lista-bolao/lista-bolao';
 
+declare var db;
 /**
  * Generated class for the LoginPage page.
  *
@@ -49,6 +51,9 @@ export class LoginPage {
       emailReset: ['', Validators.compose([Validators.required, Validators.email])]
     });
     console.log('carregando o login', authService.currentUser);
+
+    
+    
   }
 
   // Slider methods
@@ -64,7 +69,7 @@ export class LoginPage {
     this.authService.signInWithEmailAndPassword(data.email, data.password)
     .then((data) => {
       console.log('Dados usuario Login login', data);
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(ListaBolaoPage);
       
     },
     (error) => this.presentLoading(error.message)
@@ -90,7 +95,7 @@ export class LoginPage {
       return;
     }
     if (data.passwordSignUp != data.passwordSignUpConfirm) {
-      this.presentLoading('Senha incorreta!');
+      this.presentLoading('As senhas inseridas não conferem!');
       return;
     }
 
@@ -114,9 +119,8 @@ export class LoginPage {
 
     this.authService.resetPasswordEmail(data.emailReset)
     .then(
-      () => this.presentLoading('Password Reset Email Sent!'),
+      () => this.presentLoading('Redefinição de senha encaminhado para o email!'),
       (error) => this.presentLoading(error))
-    
   }
 
   signGoogle() {
@@ -124,7 +128,7 @@ export class LoginPage {
     .then(
       (user) => {
         console.log("Dados usuario Google login", user);
-        this.navCtrl.setRoot(HomePage)
+        this.navCtrl.setRoot(ListaBolaoPage)
       },
       error => console.log(error.message)
     );
@@ -157,7 +161,7 @@ export class LoginPage {
       const alert = this.alertCtrl.create({
         title: 'Alerta',
         subTitle: message,
-        buttons: ['Dismiss']
+        buttons: ['Fechar']
       });
       alert.present();
     });
