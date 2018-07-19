@@ -52,7 +52,7 @@ export class AuthServiceProvider {
         .then((auth) => {
           this.authState = auth;
           resolve(auth);
-          console.log('aprovando login');
+          console.log('Dados do usuario login authservice:', auth); 
         })
         .catch((error) => {
           reject(error);
@@ -65,14 +65,14 @@ export class AuthServiceProvider {
     var provider = new firebase.auth.GoogleAuthProvider();
     return new Promise((resolve, reject) => {
       auth.signInWithPopup(provider).then((result) => {
-        this.authState = result;
-        resolve(result);
+        var user = result.user;
+        this.authState = user;
+        resolve(user);
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        var user = result.user;
         console.log("Dados do token:", token);
-        console.log("Dados do usuario:", user);
+        console.log("Dados do usuario Google authservice:", user);
       }).catch((error) => {
         reject(error);
       });
@@ -97,7 +97,7 @@ export class AuthServiceProvider {
           resolve();
           this.authState = null;
         },
-        () => reject()
+        (error) => reject(error.message)
       )
     });
     

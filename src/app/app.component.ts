@@ -7,6 +7,7 @@ import { LoginPage } from '../pages/login/login';
 import { CriarBolaoPage } from '../pages/criar-bolao/criar-bolao';
 import { ListaBolaoPage } from '../pages/lista-bolao/lista-bolao';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { PerfilPage } from '../pages/perfil/perfil';
 
 @Component({
   templateUrl: 'app.html',
@@ -19,8 +20,9 @@ export class MyApp {
 
   public paginas = [
     { titulo: 'Meus Bolões', component: ListaBolaoPage, icone: 'person' },
-    { titulo: 'Bolões', component: ListaBolaoPage, icone: 'person' },
-    { titulo: 'Criar Bolão', component: CriarBolaoPage, icone: 'calendar' }
+    { titulo: 'Bolões', component: ListaBolaoPage, icone: 'woman' },
+    { titulo: 'Perfil', component: PerfilPage, icone: 'person' },
+    { titulo: 'Criar Bolão', component: CriarBolaoPage, icone: 'add' },
   ];
   
   constructor(platform: Platform, 
@@ -40,17 +42,20 @@ export class MyApp {
   }
 
   sair(){
-    this.authService.signOut();
-    this.nav.setRoot(LoginPage);
+    this.authService.signOut()
+    .then(
+      () => this.nav.setRoot(LoginPage),
+      (error) => console.log(error)
+    );
+    
   }
 
   get avatar() {
-    return 'assets/img/avatar-padrao.jpg';
+    return (this.authService.authState.photoURL != null) ? this.authService.authState.photoURL : 'assets/img/avatar-padrao.jpg';
   }
 
   get UsuarioLogado() {
-    console.log('logado?:', this.authService.currentUser );
-    return this.authService.currentUser;
+    return this.authService.currentUser; 
   }
 }
 

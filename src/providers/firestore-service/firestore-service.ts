@@ -8,9 +8,9 @@ declare var db;
 */
 @Injectable()
 export class FirestoreServiceProvider {
-  public array: Array<any>;
+  public colecaoLista: Array<any>;
   constructor() {
-    this.array = new Array();
+    
   }
   // se o documento ja existir sera substituido pela coleção nova
   gravarDadosSemGerarIdAutomatico(colecao: string, documentoId: string, objeto: object) {
@@ -90,13 +90,13 @@ export class FirestoreServiceProvider {
   }
 
   receberTodosDocumentosColecao(colecao: string) {
-    
+    this.colecaoLista = new Array();
     return new Promise((resolve, reject) => {
       db.collection(colecao).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           var objeto = doc.data();
-          this.array.push(objeto);
-          resolve(this.array);
+          this.colecaoLista.push(objeto);
+          resolve(this.colecaoLista);
         });
       }).catch(function (error) {
         reject(error);

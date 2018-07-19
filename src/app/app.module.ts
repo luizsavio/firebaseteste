@@ -15,6 +15,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { FirestoreServiceProvider } from '../providers/firestore-service/firestore-service';
 import { ListaBolaoPage } from '../pages/lista-bolao/lista-bolao';
 import { CriarBolaoPage } from '../pages/criar-bolao/criar-bolao';
+import { PerfilPage } from '../pages/perfil/perfil';
 //import { AngularFireAuth } from 'angularfire2/auth';
 //import { AuthServiceFire2Provider } from '../providers/auth-service-fire2/auth-service-fire2';
 
@@ -27,7 +28,8 @@ import { CriarBolaoPage } from '../pages/criar-bolao/criar-bolao';
     HomePage,
     LoginPage,
     ListaBolaoPage,
-    CriarBolaoPage
+    CriarBolaoPage,
+    PerfilPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { CriarBolaoPage } from '../pages/criar-bolao/criar-bolao';
     HomePage,
     LoginPage,
     ListaBolaoPage,
-    CriarBolaoPage
+    CriarBolaoPage,
+    PerfilPage
   ],
   providers: [
     StatusBar,

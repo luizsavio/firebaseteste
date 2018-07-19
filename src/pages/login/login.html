@@ -48,7 +48,10 @@
 
               <button ion-button block round type="submit" [disabled]="!loginForm.valid" color="light" class="login-button">Login</button>
             </form>
-              <button ion-button block round (click)="signGoogle()" color="light" class="login-button">GOOGLE</button>
+              <button ion-button block round (click)="signGoogle()" color="light" class="login-button">
+                  <ion-icon name="logo-google" item-left></ion-icon>
+                  &nbsp; GOOGLE
+              </button>
               <button ion-button clear (click)="slideNext()" color="light" class="forgot-button">FORGOT PASSWORD?</button>
             </div>
             <button ion-button clear (click)="goToSignup()" class="slide-button position-bottom">GO TO SIGNUP

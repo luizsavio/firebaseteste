@@ -8,8 +8,8 @@
                                 <img [src]="avatar">
                             </ion-avatar>
                         </div>
-                        <h2>Luiz Savio</h2>
-                        <p>luizsavio2009@hotmail.com</p>
+                        <h2>{{ UsuarioLogado.displayName }}</h2>
+                        <p>{{ UsuarioLogado.email }}</p>
                     </ion-item>
         
             <ion-list>
@@ -19,7 +19,7 @@
                     {{ pagina.titulo }}
                 </button>
                 <button ion-item menuClose (click)="sair()">
-                    <ion-icon name="Calendar" item-left></ion-icon>
+                    <ion-icon name="log-out" item-left></ion-icon>
                     Sair
                 </button>
             </ion-list>

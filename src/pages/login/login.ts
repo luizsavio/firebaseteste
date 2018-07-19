@@ -63,8 +63,9 @@ export class LoginPage {
     }
     this.authService.signInWithEmailAndPassword(data.email, data.password)
     .then((data) => {
+      console.log('Dados usuario Login login', data);
       this.navCtrl.setRoot(HomePage);
-      console.log(data);
+      
     },
     (error) => this.presentLoading(error.message)
     );
@@ -122,7 +123,7 @@ export class LoginPage {
     this.authService.signInWithGoogle()
     .then(
       (user) => {
-        console.log("Dados usuario Google", user);
+        console.log("Dados usuario Google login", user);
         this.navCtrl.setRoot(HomePage)
       },
       error => console.log(error.message)

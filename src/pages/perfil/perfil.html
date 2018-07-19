@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <ion-item no-lines>
+    <div class="avatar-wrapper">
+    <ion-avatar>
+      <img [src]="avatar">
+    </ion-avatar>
+    <button (click)="tiraFoto()" class="btn-tirar-foto" ion-button icon-only round>
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </div>
+  </ion-item>
+  <ion-card>
+    <ion-item>
+      <ion-icon name="contact" item-left></ion-icon>
+      Nome: {{ UsuarioLogado?.displayName }}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" item-left></ion-icon>
+      <p>Email: {{ UsuarioLogado?.email }}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="calendar" item-left></ion-icon>
+      <p>Data de Criação: {{ UsuarioLogado?.metadata.creationTime }}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" item-left></ion-icon>
+      <p>Email Verificado: {{ UsuarioLogado?.emailVerified ? 'Sim' : 'Não'}}</p>
+    </ion-item>
+    <ion-item>
+      <button ion-button color="danger" outline class="btn-excluir-conta">Excluir Conta</button>
+    </ion-item>
+  </ion-card>
+</ion-content>
