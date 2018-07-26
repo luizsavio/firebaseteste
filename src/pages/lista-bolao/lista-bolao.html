@@ -6,11 +6,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-list>
+<ion-content>
+    <!--<ion-list>
         <ion-item *ngFor="let bolao of meusboloes" (click)="selecionaBolao(bolao)">
           <h2>Bolão: {{ bolao.nomeGravida }} </h2>
-          <p> Data: {{ bolao.dataInicio }} </p>
+          <p> Data: {{ bolao.dataCriacao }} </p>
+        </ion-item>
+      </ion-list> -->
+      <ion-list>
+          <ion-list-header>Grávidas</ion-list-header>
+        <ion-item *ngFor="let bolao of meusboloes" (click)="selecionaBolao(bolao)">
+          <!--<ion-thumbnail item-start>
+            <img [src]= bolao.photoURL>
+          </ion-thumbnail>-->
+          <ion-avatar item-start>
+            <img [src]= bolao.photoURL>
+          </ion-avatar>
+          <h2>{{ bolao.nomeGravida }}</h2>
+          <p>{{ bolao.dataCriacao }}</p>
+          <!-- implementar uma condiçao de usuario logado com o que ta gravado em participantes e adicionar no meusboloes: array participando  -->
+          <ion-badge color="secondary" item-end *ngIf="bolao.participando">Participando</ion-badge>
         </ion-item>
       </ion-list>
       <ion-fab right bottom style="margin-right: 1%; margin-bottom: 1%">

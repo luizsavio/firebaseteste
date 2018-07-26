@@ -14,8 +14,8 @@ import { IonicPage, NavController, NavParams, DateTime } from 'ionic-angular';
   templateUrl: 'criar-bolao.html',
 })
 export class CriarBolaoPage {
+  public data: string = new Date().toISOString();
 
-  public data = Date.now();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

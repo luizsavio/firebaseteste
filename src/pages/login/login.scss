@@ -75,7 +75,7 @@ page-login-slider {
     //
     .login-button {
       width: 100%;
-      max-width: 40rem;
+      //max-width: 40rem;
       height: 50px;
       font-size: 1.2em;
       span {
@@ -114,5 +114,14 @@ page-login-slider {
       right: 0;
       margin: 0 auto;
       width: 200px;
+    }
+
+    .btn-padrao {
+      width: 99.5%;
+  }
+
+  .scroll-content{
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
     }
   }

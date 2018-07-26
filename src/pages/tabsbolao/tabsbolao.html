@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Bolão</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<ion-tabs>
+    <ion-tab tabIcon="water" tabTitle="Informações" [root]="tab1" [rootParams]="navParams.get('bolaoSelecionando')"></ion-tab>
+    <ion-tab tabIcon="leaf" tabTitle="Participantes" [root]="tab2" [rootParams]="navParams.get('bolaoSelecionando')"></ion-tab>
+    <ion-tab tabIcon="flame" tabTitle="Palpite" [root]="tab3" [rootParams]="navParams.get('bolaoSelecionando')"></ion-tab>
+    <ion-tab tabIcon="magnet" tabTitle="Editar" [root]="tab4" [rootParams]="navParams.get('bolaoSelecionando')"></ion-tab>
+  </ion-tabs>
+</ion-content>

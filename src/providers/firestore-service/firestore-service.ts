@@ -9,11 +9,12 @@ declare var db;
 @Injectable()
 export class FirestoreServiceProvider {
   public colecaoLista: Array<any>;
+
   constructor() {
     
   }
   // se o documento ja existir sera substituido pela coleção nova
-  gravarDadosSemGerarIdAutomatico(colecao: string, documentoId: string, objeto: object) {
+  gravarDadosSemGerarIdAutomatico(colecao: string, documentoId: string, objeto: object): any {
     return new Promise((resolve, reject) => {
       db.collection(colecao).doc(documentoId).set(objeto)
         .then(() => {
@@ -27,7 +28,7 @@ export class FirestoreServiceProvider {
     });
   }
 
-  gravarDadosGerarIdAutomatico(colecao: string, objeto: object) {
+  gravarDadosGerarIdAutomatico(colecao: string, objeto: object): any {
     return new Promise((resolve, reject) => {
       db.collection(colecao).add(objeto)
         .then((docRef) => {
@@ -43,7 +44,7 @@ export class FirestoreServiceProvider {
   //timestamp: firebase.firestore.FieldValue.serverTimestamp() - 
   //adicionar carimbos de data/hora do servidor a campos específicos
   // nos seus documentos para rastrear quando uma atualização foi recebida pelo servidor
-  atualizarDocumento(colecao: string, documentoId: string, objeto: object) {
+  atualizarDocumento(colecao: string, documentoId: string, objeto: object): any {
     return new Promise((resolve, reject) => {
       // Set the "capital" field of the city 'DC'
       return db.collection(colecao).doc(documentoId).update(objeto)
@@ -59,42 +60,44 @@ export class FirestoreServiceProvider {
     });
   }
 
-  excluirDocumento(colecao: string, documentoId: string) {
+  excluirDocumento(colecao: string, documentoId: string): any {
     return new Promise((resolve, reject) => {
       db.collection(colecao).doc(documentoId).delete()
         .then(() => {
           resolve();
           console.log("Document successfully deleted!");
         }).catch((error) => {
-          reject(error);
+          reject(error.message);
           console.error("Error removing document: ", error);
         });
     });
   }
 
-  receberUmDocumento(colecao: string, documentoId: string) {
+  receberUmDocumento(colecao: string, documentoId: string): any {
     return new Promise((resolve, reject) => {
       db.collection(colecao).doc(documentoId).get().then(function (doc) {
         if (doc.exists) {
-          console.log("Document data:", doc.data());
+          console.log("Document data:", doc.id, doc.data());
           resolve(doc);
         } else {
+          resolve(false);
           // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       }).catch(function (error) {
         console.log("Error getting document:", error);
-        reject(error);
+        reject(error.message);
       });
     });
   }
 
-  receberTodosDocumentosColecao(colecao: string) {
+  receberTodosDocumentosColecao(colecao: string): any {
     this.colecaoLista = new Array();
     return new Promise((resolve, reject) => {
       db.collection(colecao).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           var objeto = doc.data();
+          objeto["idDocumento"] = doc.id;
           this.colecaoLista.push(objeto);
           resolve(this.colecaoLista);
         });
@@ -105,14 +108,15 @@ export class FirestoreServiceProvider {
     });
   }
 
-  receberVariosDocumentosFiltrado(colecao: string, campoDocumento: string, condicao: string, valor: string){
+  receberVariosDocumentosFiltrado(colecao: string, campoDocumento: string, condicao: string, valor: string): any{
     this.colecaoLista = new Array();
     return new Promise((resolve, reject) =>{
       db.collection(colecao).where(campoDocumento, condicao, valor)
       .get()
-      .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             var objeto = doc.data();
+            objeto["idDocumento"] = doc.id;
             this.colecaoLista.push(objeto);
             resolve(this.colecaoLista);
              // console.log(doc.id, " => ","Vindo da consulta", doc.data());

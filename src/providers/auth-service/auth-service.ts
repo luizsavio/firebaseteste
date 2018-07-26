@@ -17,14 +17,15 @@ export class AuthServiceProvider {
 
   }
 
-  createUserWithEmailAndPassword(name: string, email: string, password: string) {
+  createUserWithEmailAndPassword(name: string, email: string, password: string): any {
     return new Promise((resolve, reject) => {
       auth.createUserWithEmailAndPassword(email, password)
         .then((user) => {
           this.authState = user;
           this.updateProfileName(name);
+          this.authState = null;
           console.log('usuario apos cadastro', this.authState);
-          resolve();
+          resolve(user);
           console.log('Aprovando cadastro');
         })
         .catch((error) => {

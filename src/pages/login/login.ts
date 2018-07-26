@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, /*NavParams,*/ LoadingController, AlertController, App, Slides } from 'ionic-angular';
-import { HomePage } from '../home/home';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ListaBolaoPage } from '../lista-bolao/lista-bolao';
+import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
 
-declare var db;
 /**
  * Generated class for the LoginPage page.
  *
@@ -21,11 +20,11 @@ declare var db;
 export class LoginPage {
   
   
-  public backgroundImage = 'assets/img/background/background-6.jpg';
+  public backgroundImage = 'assets/img/background/background-10.jpg';
   loginForm: FormGroup;
   formSignup: FormGroup;
   formReset: FormGroup;
-  
+  usuario: any;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -33,6 +32,7 @@ export class LoginPage {
     public app: App,
     public navCtrl: NavController,
     public authService: AuthServiceProvider,
+    public firestoreService: FirestoreServiceProvider,
     fb: FormBuilder
   ) {
     this.loginForm = fb.group({
@@ -74,16 +74,6 @@ export class LoginPage {
     },
     (error) => this.presentLoading(error.message)
     );
-    /*this.authService.loginWithEmail(data.email, data.password)
-      .then(
-        () => {
-          console.log(this.authService);
-          this.navCtrl.setRoot(HomePage)
-        },
-        (error) => this.presentLoading(error.message)
-      );*/
-
-    //this.navCtrl.push(HomePage);
   }
 
   signUp() {
@@ -100,9 +90,17 @@ export class LoginPage {
     }
 
     this.authService.createUserWithEmailAndPassword(data.nameSignUp ,data.emailSignUp, data.passwordSignUp)
-      .then(() => {
-        this.slider.slideTo(1);
+      .then((user) => {
+         this.usuario = {
+          uid: user.uid,
+          nomeUsuario: data.nameSignUp,
+          email: user.email,
+          photoUrl: 'assets/img/avatar-padrao.jpg'
+        }
+        
+        this.firestoreService.gravarDadosSemGerarIdAutomatico('usuario', user.uid, this.usuario);
         this.presentLoading('Usuário cadastrado com sucesso!');
+        this.slider.slideTo(1);
       },
         (error) => {
           this.presentLoading(error.message);
@@ -122,18 +120,28 @@ export class LoginPage {
       () => this.presentLoading('Redefinição de senha encaminhado para o email!'),
       (error) => this.presentLoading(error))
   }
-
+//verificar se vai funcionar
   signGoogle() {
     this.authService.signInWithGoogle()
     .then(
       (user) => {
+        this.firestoreService.receberUmDocumento('usuario', user.uid).
+        then((resultado) => {
+          if (resultado == false){
+            this.usuario = {
+              uid: user.uid,
+              nomeUsuario: user.displayName,
+              email: user.email,
+              photoUrl: user.photoURL
+            }
+            this.firestoreService.gravarDadosSemGerarIdAutomatico('usuario', user.uid, this.usuario);
+          } 
+        });
         console.log("Dados usuario Google login", user);
-        this.navCtrl.setRoot(ListaBolaoPage)
+        this.navCtrl.setRoot(ListaBolaoPage);
       },
       error => console.log(error.message)
     );
-
-    
   }
 
   goToLogin() {

@@ -21,14 +21,9 @@
       <ion-input type="text" value=""></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item style="padding-left: 0px;">
       <ion-label floating>Data Prevista de nascimento</ion-label>
-      <ion-input type="text" value=""></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Start Time</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="data"></ion-datetime>
+      <ion-datetime [(ngModel)]="data" name="data" displayFormat="DD/MM/YYYY"></ion-datetime>
     </ion-item>
 
   </ion-list>

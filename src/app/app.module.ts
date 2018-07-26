@@ -16,6 +16,11 @@ import { FirestoreServiceProvider } from '../providers/firestore-service/firesto
 import { ListaBolaoPage } from '../pages/lista-bolao/lista-bolao';
 import { CriarBolaoPage } from '../pages/criar-bolao/criar-bolao';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { TabsbolaoPage } from '../pages/tabsbolao/tabsbolao';
+import { BolaoEditarPage } from '../pages/bolao-editar/bolao-editar';
+import { BolaoPalpitePage } from '../pages/bolao-palpite/bolao-palpite';
+import { BolaoInformacaoPage } from '../pages/bolao-informacao/bolao-informacao';
+import { BolaoParticipantesPage } from '../pages/bolao-participantes/bolao-participantes';
 //import { AngularFireAuth } from 'angularfire2/auth';
 //import { AuthServiceFire2Provider } from '../providers/auth-service-fire2/auth-service-fire2';
 
@@ -29,7 +34,12 @@ import { PerfilPage } from '../pages/perfil/perfil';
     LoginPage,
     ListaBolaoPage,
     CriarBolaoPage,
-    PerfilPage
+    PerfilPage,
+    TabsbolaoPage,
+    BolaoEditarPage,
+    BolaoPalpitePage,
+    BolaoInformacaoPage,
+    BolaoParticipantesPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,12 @@ import { PerfilPage } from '../pages/perfil/perfil';
     LoginPage,
     ListaBolaoPage,
     CriarBolaoPage,
-    PerfilPage
+    PerfilPage,
+    TabsbolaoPage,
+    BolaoEditarPage,
+    BolaoPalpitePage,
+    BolaoInformacaoPage,
+    BolaoParticipantesPage
   ],
   providers: [
     StatusBar,
