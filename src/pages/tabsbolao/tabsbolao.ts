@@ -23,13 +23,14 @@ export class TabsbolaoPage {
   tab2: any;
   tab3: any;
   tab4: any;
+  bolao;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.tab1 = BolaoInformacaoPage;
     this.tab2 = BolaoParticipantesPage;
     this.tab3 = BolaoPalpitePage;
     this.tab4 = BolaoEditarPage;
-    
+    this.bolao = navParams.get('bolaoSelecionando');
   }
 
 

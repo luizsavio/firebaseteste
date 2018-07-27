@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'bolao-palpite.html',
 })
 export class BolaoPalpitePage {
-
+  public data: string = new Date().toISOString();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

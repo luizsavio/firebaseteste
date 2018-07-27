@@ -2,4 +2,12 @@
     <ion-list>
         <ion-list-header>Palpite</ion-list-header>
         </ion-list>
+        <h3>*Escolha aqui a data em que bebê irá nascer.</h3>
+        <ion-list inset>
+                <ion-item style="padding-left: 0px;">
+                  <ion-label floating>Data Nascimento:</ion-label>
+                  <ion-datetime [(ngModel)]="data" name="data" displayFormat="DD/MM/YYYY"></ion-datetime>
+                </ion-item>
+            
+              </ion-list>
 </ion-content>

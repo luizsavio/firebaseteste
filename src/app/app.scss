@@ -1,4 +1,8 @@
 myapp {
+    .tirar-barra {
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+     }
     #cabecalho-menu .item-inner {
         border: none;
     }
