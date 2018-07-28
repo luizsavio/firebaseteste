@@ -14,20 +14,22 @@
 
 
 <ion-content padding>
+    <form (ngSubmit)="criar()" [formGroup]="criarForm">
   <ion-list inset>
 
     <ion-item>
       <ion-label floating>Nome da Grávida</ion-label>
-      <ion-input type="text" value=""></ion-input>
+      <ion-input type="text" value="" formControlName="nomeGravida"></ion-input>
     </ion-item>
 
     <ion-item style="padding-left: 0px;">
       <ion-label floating>Data Prevista de nascimento</ion-label>
-      <ion-datetime [(ngModel)]="data" name="data" displayFormat="DD/MM/YYYY"></ion-datetime>
+      <ion-datetime [(ngModel)]="data" name="data" displayFormat="DD/MM/YYYY" formControlName="dataPrevista"></ion-datetime>
     </ion-item>
 
   </ion-list>
   <div padding>
-      <button ion-button color="primary" block>Criar</button>
+      <button type="submit" [disabled]="!criarForm.valid" ion-button color="primary" block>Criar</button>
     </div>
+  </form>
 </ion-content>
