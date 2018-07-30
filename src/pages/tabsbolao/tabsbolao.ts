@@ -33,6 +33,7 @@ export class TabsbolaoPage {
     this.tab3 = BolaoPalpitePage;
     this.tab4 = BolaoEditarPage;
     this.bolao = navParams.get('bolaoSelecionando');
+    console.log('bolao selecionado tab', this.bolao);
     (authService.currentUser.uid == this.bolao.idUsuarioBolaoCriado) ? this.criador = true : this.criador = false
   }
 

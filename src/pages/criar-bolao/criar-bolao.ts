@@ -57,7 +57,7 @@ export class CriarBolaoPage {
             this.firestoreService.gravarDadosSemGerarIdAutomatico('bolaoparticipantes', bolaoref.id, {
               idBolao: bolaoref.id,
               "participantes": [
-                { idUsuario: this.authService.currentUser.uid, participando: true }
+                { idUsuario: this.authService.currentUser.uid, participando: true, dataPalpite: null }
               ]
             })
               .then(() => {

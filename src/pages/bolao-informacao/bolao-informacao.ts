@@ -18,31 +18,39 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 export class BolaoInformacaoPage {
   public bolao;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public firestoreService: FirestoreServiceProvider,
     public authService: AuthServiceProvider) {
     this.bolao = navParams.data;
+    console.log('bolao informaçao:', this.bolao);
   }
 
-  participar(){
+  participar() {
     //tem que corrigir este problema para adicionar um novo campo
-    /*this.firestoreService.receberUmDocumento('bolaoparticipantes', this.bolao.idBolao)
-    .then((objeto) => {
-      let obj = objeto.data();
-      let lista = new Array(); 
-      lista = obj.participantes;
-      lista.push({
-         idUsuario: this.authService.currentUser.uid,
-        participando: true
+    this.firestoreService.receberUmDocumento('bolaoparticipantes', this.bolao.idBolao)
+      .then((objeto) => {
+        let obj = objeto.data();
+        let lista = new Array();
+        lista = obj.participantes;
+        let objetoUsuario = {
+          idUsuario: this.authService.currentUser.uid,
+          participando: true,
+          dataPalpite: null
+        }
+        lista.push(objetoUsuario);
+        obj.participantes = lista;
+        console.log('VErificando objeto ', obj);
+        this.firestoreService.gravarDadosSemGerarIdAutomatico('bolaoparticipantes', this.bolao.idBolao, obj);
+        let lista02 = new Array();
+        lista02 = this.bolao.bolaoparticipantes.participantes;
+        lista02.push(objetoUsuario);
+        this.bolao.bolaoparticipantes.participantes = lista02;
+        this.bolao['participando'] = true;
+        console.log('bolao informaçao:', this.bolao);
       });
-      obj.participantes = lista;
-      console.log('VErificando objeto ', obj);
-      this.firestoreService.gravarDadosSemGerarIdAutomatico('bolaoparticipantes', this.bolao.idBolao, obj);
-    })*/
-    
   }
 
   ionViewDidLoad() {

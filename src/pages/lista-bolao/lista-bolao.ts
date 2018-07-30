@@ -42,12 +42,12 @@ export class ListaBolaoPage {
               for (const participante of participantes) {
                 if (itembolao.idBolao == participante.idBolao) {
                   itembolao['bolaoparticipantes'] = participante;
-                  this.meusboloes.push(itembolao);
                   for (const item of itembolao.bolaoparticipantes.participantes) {
                     if (this.authservice.authState.uid == item.idUsuario && item.participando == true) {
                       itembolao['participando'] = true;
                     }
                   }
+                  this.meusboloes.push(itembolao);
                 }
               }
             }

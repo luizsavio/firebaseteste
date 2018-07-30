@@ -19,7 +19,7 @@ export class BolaoParticipantesPage {
     console.log('o que veio do volao pgparticipantes:', this.bolao);
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter(){
     this.carregarParticipantes();
   }
 
@@ -28,10 +28,12 @@ export class BolaoParticipantesPage {
     for (const item of this.bolao.bolaoparticipantes.participantes) {
       this.firestoreService.receberVariosDocumentosFiltrado('usuario', 'uid', '==', item.idUsuario)
         .then((lista) => {
-          for (const itemArray of lista) {
+          this.listaParticipantes = lista;
+          //console.log('lista apenas:', lista);
+          /*for (const itemArray of lista) {
             this.listaParticipantes.push(itemArray);
-          }
-          console.log('lista de usuario:', this.listaParticipantes);
+          }*/
+          //console.log('lista de usuario:', this.listaParticipantes);
         });
     }
   }
