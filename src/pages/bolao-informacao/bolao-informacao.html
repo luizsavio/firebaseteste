@@ -7,7 +7,7 @@
                 <p>Data do nascimento do bebê: {{ bolao.dataNascimento ? bolao.dataNascimento : '???' }}</p>
                 <p>Data limite da aposta: {{ bolao.dataLimiteAposta ? bolao.dataLimiteAposta : '???' }}</p>
                 <ion-fab *ngIf="!bolao.participando" style="position: absolute; z-index: 999; bottom: 0px; width: 100%; padding-right: 15px; padding-left: 15px; padding-bottom: 5px">
-                        <button ion-button color="primary" block (click)="participar()" (keyup)="0">
+                        <button ion-button color="primary" block (click)="participar()" (mousedown)="0">
                                 Participar
                         </button>
                 </ion-fab>

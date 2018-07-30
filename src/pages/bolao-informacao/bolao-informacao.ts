@@ -29,11 +29,20 @@ export class BolaoInformacaoPage {
 
   participar(){
     //tem que corrigir este problema para adicionar um novo campo
-    this.firestoreService.atualizarDocumento('bolaoparticipantes', this.bolao.idBolao, {
-      partipantes: [
-        { idUsuario: this.authService.currentUser.uid, participando: true }
-      ]
-    });
+    /*this.firestoreService.receberUmDocumento('bolaoparticipantes', this.bolao.idBolao)
+    .then((objeto) => {
+      let obj = objeto.data();
+      let lista = new Array(); 
+      lista = obj.participantes;
+      lista.push({
+         idUsuario: this.authService.currentUser.uid,
+        participando: true
+      });
+      obj.participantes = lista;
+      console.log('VErificando objeto ', obj);
+      this.firestoreService.gravarDadosSemGerarIdAutomatico('bolaoparticipantes', this.bolao.idBolao, obj);
+    })*/
+    
   }
 
   ionViewDidLoad() {

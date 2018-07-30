@@ -46,8 +46,6 @@ export class ListaBolaoPage {
                   for (const item of itembolao.bolaoparticipantes.participantes) {
                     if (this.authservice.authState.uid == item.idUsuario && item.participando == true) {
                       itembolao['participando'] = true;
-                    } else {
-                      itembolao['participando'] = false;
                     }
                   }
                 }
