@@ -18,7 +18,7 @@ import { FirestoreServiceProvider } from '../../providers/firestore-service/fire
 })
 export class CriarBolaoPage {
   criarForm: FormGroup;
-  public data: string = new Date().toISOString();
+  public dataLimiteAposta: any;
   public dataCriacao: string = new Date().toISOString();
   public bolao: object;
   
@@ -37,11 +37,16 @@ export class CriarBolaoPage {
   }
 
   criar() {
-
     let data = this.criarForm.value;
+    var dataAux = new Date(data.dataPrevista);
+    var dataLimite = dataAux;
+    dataLimite.setDate(dataAux.getDate() - 30);
+    this.dataLimiteAposta = dataLimite.toISOString();
+    //this.dataLimiteAposta = dataAux;
+
     this.bolao = {
       dataCriacao: this.dataCriacao,
-      dataLimiteAposta: null,
+      dataLimiteAposta: this.dataLimiteAposta,
       dataNascimento: null,
       dataPrevistaNascimento: data.dataPrevista,
       idBolao: null,

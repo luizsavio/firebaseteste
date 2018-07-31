@@ -5,7 +5,10 @@
                 <p>Nome da Grávida: {{ bolao.nomeGravida }}</p>
                 <p>Data Prevista Nascimento: {{ bolao.dataPrevistaNascimento }}</p>
                 <p>Data do nascimento do bebê: {{ bolao.dataNascimento ? bolao.dataNascimento : '???' }}</p>
-                <p>Data limite da aposta: {{ bolao.dataLimiteAposta ? bolao.dataLimiteAposta : '???' }}</p>
+                <p>Data limite da aposta: {{ bolao.dataLimiteAposta | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+                <p>Data do meu palpite: {{ meupalpite ? meupalpite : 'Você ainda não fez nenhum palpite' }}</p>
+                <p>Data criação: {{ bolao.dataCriacao }}</p>
+                <p>Status: {{ bolao.dataNascimento ? 'Finalizado' : 'Em aberto' }}</p>
                 <ion-fab *ngIf="!bolao.participando" (mousedown)="0" class="btn-fab-estilo">
                         <button ion-button color="primary" block (click)="participar()">
                                 Participar

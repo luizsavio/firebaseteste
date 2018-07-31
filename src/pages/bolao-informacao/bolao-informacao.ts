@@ -17,6 +17,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 })
 export class BolaoInformacaoPage {
   public bolao;
+  public meupalpite;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,6 +27,7 @@ export class BolaoInformacaoPage {
     public authService: AuthServiceProvider) {
     this.bolao = navParams.data;
     console.log('bolao informaçao:', this.bolao);
+    
   }
 
   participar() {
@@ -53,8 +55,12 @@ export class BolaoInformacaoPage {
       });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BolaoInformacaoPage');
+  ionViewDidEnter() {
+    for (const item of this.bolao.bolaoparticipantes.participantes) {
+      if(this.authService.currentUser.uid == item.idUsuario){
+        this.meupalpite = item.dataPalpite;
+      }
+    }
   }
 
 
