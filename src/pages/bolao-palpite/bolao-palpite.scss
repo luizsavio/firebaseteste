@@ -3,4 +3,13 @@ page-bolao-palpite {
         overflow-y: hidden !important; 
         overflow-x: hidden !important;
      }
+     .btn-fab-estilo{
+        position: absolute; 
+        z-index: 999; 
+        bottom: 0px; 
+        width: 100%; 
+        padding-right: 15px; 
+        padding-left: 15px; 
+        padding-bottom: 5px
+     }
 }
