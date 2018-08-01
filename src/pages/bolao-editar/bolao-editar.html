@@ -1,7 +1,20 @@
 <ion-content padding>
-    
+    <form (ngSubmit)="salvar()" [formGroup]="editarForm">
     <ion-list>
         <ion-list-header>Editar</ion-list-header>
+        <ion-item>
+            <ion-label stacked>Nome da Grávida</ion-label>
+            <ion-input [(ngModel)]="nome" name="nome" type="text" formControlName="nomeGravida"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label stacked>Data nascimento do bebê(CUIDADO)</ion-label>
+            <ion-datetime [(ngModel)]="data" name="data" max="2050-12-31" displayFormat="DD/MM/YYYY" formControlName="dataNascimento"></ion-datetime>
+          </ion-item>
         </ion-list>
-        <p *ngIf="teste == null">A partir do momento que você atribuir a data de nascimento do bebê, o bolão é da dado como encerrado"</p>
+        <div padding>
+            <button type="submit" [disabled]="!editarForm.valid" ion-button color="primary" block>Salvar</button>
+          </div>
+        </form>
+        <p>Voce como administrador do bolão tem que ter em mente que quando clicar em salvar com uma data atribuida, o bolão entrará em estado de finalizado e não poderá mais ser alterado.</p>
 </ion-content>
