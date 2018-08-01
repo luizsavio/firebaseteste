@@ -52,7 +52,8 @@ export class CriarBolaoPage {
       idBolao: null,
       idUsuarioBolaoCriado: this.authService.currentUser.uid,
       nomeGravida: data.nomeGravida,
-      photoURL: 'assets/img/Pregnant-woman.jpg'
+      photoURL: 'assets/img/Pregnant-woman.jpg',
+      ganhadorProximo: { idUsuario: null, nomeUsuario: null, dataPalpite: null }
     }
     this.firestoreService.gravarDadosGerarIdAutomatico('bolao', this.bolao)
       .then((bolaoref) => {
