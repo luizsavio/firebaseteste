@@ -3,13 +3,13 @@
                 <ion-list-header>Informações:</ion-list-header>
                 </ion-list>
                 <p>Nome da Grávida: {{ bolao.nomeGravida }}</p>
-                <p>Data Prevista Nascimento: {{ bolao.dataPrevistaNascimento }}</p>
-                <p>Data do nascimento do bebê: {{ bolao.dataNascimento ? bolao.dataNascimento : '???' }}</p>
-                <p>Data limite da aposta: {{ bolao.dataLimiteAposta | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
-                <p>Data do meu palpite: {{ meupalpite ? meupalpite : 'Você ainda não fez nenhum palpite' }}</p>
-                <p>Data criação: {{ bolao.dataCriacao }}</p>
+                <p>Data Prevista Nascimento: {{ bolao.dataPrevistaNascimento | date: 'dd/MM/yyyy' }}</p>
+                <p>Data do nascimento do bebê: {{ !bolao.dataNascimento ? 'Bolão não foi finalizado ainda!': bolao.dataNascimento | date: 'dd/MM/yyyy' }}</p>
+                <p>Data limite da aposta: {{ bolao.dataLimiteAposta | date: 'dd/MM/yyyy' }}</p>
+                <p>Data do meu palpite: {{ !meupalpite ? 'Você ainda não fez nenhum palpite' : meupalpite | date: 'dd/MM/yyyy' }}</p>
+                <p>Data criação: {{ bolao.dataCriacao  | date: 'dd/MM/yyyy' }}</p>
                 <p>Status: {{ bolao.dataNascimento ? 'Finalizado' : 'Em aberto' }}</p>
-                <p>Participante que teve mais exatidão no palpite: Em fase de implementação.</p>
+                <p>Participante melhor palpite: {{ bolao.ganhadorProximo.nomeUsuario ? bolao.ganhadorProximo.nomeUsuario : 'Bolão não foi finalizado ainda!' }}</p>
                 <ion-fab *ngIf="!bolao.participando" (mousedown)="0" class="btn-fab-estilo">
                         <button ion-button color="primary" block (click)="participar()">
                                 Participar

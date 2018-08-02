@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, DateTime, LoadingController, Alert
 import { FormBuilder, FormGroup, Validators } from '../../../node_modules/@angular/forms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
+import { ListaBolaoPage } from '../lista-bolao/lista-bolao';
 
 /**
  * Generated class for the CriarBolaoPage page.
@@ -53,7 +54,7 @@ export class CriarBolaoPage {
       idUsuarioBolaoCriado: this.authService.currentUser.uid,
       nomeGravida: data.nomeGravida,
       photoURL: 'assets/img/Pregnant-woman.jpg',
-      ganhadorProximo: { idUsuario: null, nomeUsuario: null, dataPalpite: null }
+      ganhadorProximo: { idUsuario: null, nomeUsuario: null, dataPalpite: null, dias: null }
     }
     this.firestoreService.gravarDadosGerarIdAutomatico('bolao', this.bolao)
       .then((bolaoref) => {
@@ -69,6 +70,7 @@ export class CriarBolaoPage {
               .then(() => {
                 console.log('bolaoparticipantes adicionado com sucesso.');
                 this.presentLoading('Bolão criado com sucesso!');
+                return;
               },
                 () => {
                   console.log('bolaoparticipantes adicionado com sucesso.');
@@ -83,10 +85,6 @@ export class CriarBolaoPage {
         });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CriarBolaoPage');
-  }
-
   presentLoading(message) {
     const loading = this.loadingCtrl.create({
       duration: 500
@@ -96,7 +94,13 @@ export class CriarBolaoPage {
       const alert = this.alertCtrl.create({
         title: 'Alerta',
         subTitle: message,
-        buttons: ['Fechar']
+        buttons: [{
+          text: 'Fechar',
+        handler: () => {
+          this.navCtrl.setRoot(ListaBolaoPage);
+        }
+      }
+    ]
       });
       alert.present();
     });

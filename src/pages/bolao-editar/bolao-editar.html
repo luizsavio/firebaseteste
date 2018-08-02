@@ -4,17 +4,19 @@
         <ion-list-header>Editar</ion-list-header>
         <ion-item>
             <ion-label stacked>Nome da Grávida</ion-label>
-            <ion-input [(ngModel)]="nome" name="nome" type="text" formControlName="nomeGravida"></ion-input>
+            <ion-input [(ngModel)]="nome" name="nome" type="text" formControlName="nomeGravida" [disabled]="bolao.dataNascimento != null"></ion-input>
           </ion-item>
-      
           <ion-item>
-            <ion-label stacked>Data nascimento do bebê(CUIDADO)</ion-label>
-            <ion-datetime [(ngModel)]="data" name="data" max="2050-12-31" displayFormat="DD/MM/YYYY" formControlName="dataNascimento"></ion-datetime>
+          <p>*Voce como administrador do bolão tem que ter em mente que quando clicar em salvar com uma data atribuida, o bolão entrará em estado de finalizado e não poderá mais ser alterado.</p>
+        </ion-item>
+          <ion-item>
+            <ion-label stacked>Data nascimento do bebê(CUIDADO*)</ion-label>
+            <ion-datetime [(ngModel)]="data" name="data" max="2050-12-31" displayFormat="DD/MM/YYYY" formControlName="dataNascimento" [disabled]="bolao.dataNascimento != null"></ion-datetime>
           </ion-item>
         </ion-list>
         <div padding>
-            <button type="submit" [disabled]="!editarForm.valid" ion-button color="primary" block>Salvar</button>
+            <button type="submit" [disabled]="bolao.dataNascimento || !editarForm.valid" ion-button color="primary" block>Salvar</button>
           </div>
         </form>
-        <p>Voce como administrador do bolão tem que ter em mente que quando clicar em salvar com uma data atribuida, o bolão entrará em estado de finalizado e não poderá mais ser alterado.</p>
+        
 </ion-content>

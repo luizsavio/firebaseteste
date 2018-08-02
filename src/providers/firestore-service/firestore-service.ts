@@ -53,7 +53,7 @@ export class FirestoreServiceProvider {
           console.log("Document successfully updated!");
         })
         .catch((error) => {
-          reject(error);
+          reject(error.message);
           // The document probably doesn't exist.
           console.error("Error updating document: ", error);
         });

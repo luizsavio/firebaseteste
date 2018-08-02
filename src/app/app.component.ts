@@ -19,7 +19,6 @@ export class MyApp {
   rootPage: any = LoginPage;
 
   public paginas = [
-    { titulo: 'Meus Bolões', component: ListaBolaoPage, icone: 'person' },
     { titulo: 'Bolões', component: ListaBolaoPage, icone: 'woman' },
     { titulo: 'Perfil', component: PerfilPage, icone: 'person' },
     { titulo: 'Criar Bolão', component: CriarBolaoPage, icone: 'add' },

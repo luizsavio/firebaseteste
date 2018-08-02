@@ -60,7 +60,7 @@ export class ListaBolaoPage {
     this.navCtrl.push(TabsbolaoPage, { bolaoSelecionando: bolao });
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.carregarBoloes();
   }
 

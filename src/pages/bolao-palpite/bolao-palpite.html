@@ -5,11 +5,11 @@
       <h3>*Escolha aqui a data em que bebê irá nascer.</h3>
       <ion-item style="padding-left: 0px;">
         <ion-label stacked>Data Nascimento:</ion-label>
-        <ion-datetime [(ngModel)]="data" name="data" displayFormat="DD/MM/YYYY" formControlName="dataPalpite"></ion-datetime>
+        <ion-datetime [(ngModel)]="data" name="data" displayFormat="DD/MM/YYYY" formControlName="dataPalpite" [disabled]="bolao.dataNascimento != null"></ion-datetime>
       </ion-item>
     </ion-list>
     <ion-fab class="btn-fab-estilo">
-      <button ion-button color="primary" block [disabled]="!palpiteForm.valid">
+      <button ion-button color="primary" block [disabled]="bolao.dataNascimento || !palpiteForm.valid">
         Salvar
       </button>
     </ion-fab>

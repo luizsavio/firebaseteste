@@ -22,7 +22,7 @@ export class BolaoEditarPage {
   public data;
   public editarForm: FormGroup;
   public bolao: any;
-  
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public authService: AuthServiceProvider,
@@ -41,31 +41,61 @@ export class BolaoEditarPage {
 
   }
 
-  salvar(){
+  salvar() {
     let data = this.editarForm.value;
     let lista = new Array();
-    let lista2 = [9,2,7]
+
     for (let itemparticipante of this.bolao.bolaoparticipantes.participantes) {
       var dataPalpite = new Date(itemparticipante.dataPalpite);
       var dataNascimento = new Date(data.dataNascimento);
       var timeDiff = Math.abs(dataNascimento.getTime() - dataPalpite.getTime());
-      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       itemparticipante['dias'] = diffDays;
       lista.push(itemparticipante);
-     }
-     let listaminima = (array) => {
-      return Math.min.apply(Math, array);
-  };
-    console.log('teste lista organizado', listaminima(lista2));
-     console.log('dias', lista);
-    let objEditado = {
-      dataNascimento: data.dataNascimento
     }
-    //this.firestoreService.atualizarDocumento('bolao', this.bolao.idBolao, objEditado);
+    let n = Number.MAX_VALUE;
+    let objetoMenor;
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i].dias < n)
+      {
+          n = lista[i].dias;
+          objetoMenor = lista[i];
+      } 
+    }
+    console.log('dias', lista);
+    console.log('objeto menor', objetoMenor);
+    if(data.dataNascimento != null){
+      this.firestoreService.receberUmDocumento('usuario', objetoMenor.idUsuario).
+      then((doc) => {
+        let obj = doc.data();
+        let objEditado = {
+          dataNascimento: data.dataNascimento,
+          ganhadorProximo: { 
+            dataPalpite: objetoMenor.dataPalpite, 
+            dias: objetoMenor.dias, 
+            idUsuario: objetoMenor.idUsuario, 
+            nomeUsuario: obj.nomeUsuario}
+        }
+        this.firestoreService.atualizarDocumento('bolao', this.bolao.idBolao, objEditado)
+        .then(() => {
+          console.log('só sucesso');
+        },
+      (error) => console.log(error));
+      });
+    } else{
+      let objEditado = {
+        nomeGravida: data.nomeGravida
+      }
+      this.firestoreService.atualizarDocumento('bolao', this.bolao.idBolao, objEditado)
+        .then(() => {
+          console.log('só sucesso');
+        },
+      (error) => console.log(error));
+    } 
   }
 
-  ganhadorProximo(){
-     
+  ganhadorProximo() {
+
   }
 
   ionViewDidLoad() {
