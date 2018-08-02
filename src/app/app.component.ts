@@ -40,15 +40,6 @@ export class MyApp {
     this.nav.push(component);
   }
 
-  sair(){
-    this.authService.signOut()
-    .then(
-      () => this.nav.setRoot(LoginPage),
-      (error) => console.log(error)
-    );
-    
-  }
-
   get avatar() {
     return (this.authService.authState.photoURL != null) ? this.authService.authState.photoURL : 'assets/img/avatar-padrao.jpg';
   }

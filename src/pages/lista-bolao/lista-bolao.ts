@@ -4,6 +4,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
 import { CriarBolaoPage } from '../criar-bolao/criar-bolao';
 import { TabsbolaoPage } from '../tabsbolao/tabsbolao';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ListaBolaoPage page.
@@ -62,6 +63,14 @@ export class ListaBolaoPage {
 
   ionViewDidEnter() {
     this.carregarBoloes();
+  }
+
+  sair(){
+    this.authservice.signOut()
+    .then(
+      () => this.navCtrl.setRoot(LoginPage),
+      (error) => console.log(error)
+    );
   }
 
   presentLoading(message) {

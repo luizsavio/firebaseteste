@@ -78,7 +78,9 @@ export class BolaoEditarPage {
         }
         this.firestoreService.atualizarDocumento('bolao', this.bolao.idBolao, objEditado)
         .then(() => {
-          console.log('só sucesso');
+          this.bolao = objEditado;
+          console.log('verificar se ta ok: ', this.bolao);
+          this.presentLoading('Bolão '+ + 'finalizado com sucesso! Verifique a aba de informações e verifique quem teve mais sorte :D');
         },
       (error) => console.log(error));
       });
@@ -94,8 +96,24 @@ export class BolaoEditarPage {
     } 
   }
 
-  ganhadorProximo() {
+  presentLoading(message) {
+    const loading = this.loadingCtrl.create({
+      duration: 200
+    });
 
+    loading.onDidDismiss(() => {
+      const alert = this.alertCtrl.create({
+        title: 'Alerta',
+        subTitle: message,
+        buttons: [{
+          text: 'Fechar'
+      }
+    ]
+      });
+      alert.present();
+    });
+
+    loading.present();
   }
 
   ionViewDidLoad() {
