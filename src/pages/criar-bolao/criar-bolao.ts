@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, DateTime, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '../../../node_modules/@angular/forms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';

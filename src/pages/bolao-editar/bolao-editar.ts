@@ -78,9 +78,10 @@ export class BolaoEditarPage {
         }
         this.firestoreService.atualizarDocumento('bolao', this.bolao.idBolao, objEditado)
         .then(() => {
-          this.bolao = objEditado;
+          this.bolao.dataNascimento = objEditado.dataNascimento;
+          this.bolao.ganhadorProximo = objEditado.ganhadorProximo;
           console.log('verificar se ta ok: ', this.bolao);
-          this.presentLoading('Bolão '+ + 'finalizado com sucesso! Verifique a aba de informações e verifique quem teve mais sorte :D');
+          this.presentLoading('Bolão '+ this.bolao.nomeGravida+ ' finalizado com sucesso! Verifique a aba de informações e verifique quem teve mais sorte :D');
         },
       (error) => console.log(error));
       });

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PerfilPage } from '../perfil/perfil';
 import { BolaoInformacaoPage } from '../bolao-informacao/bolao-informacao';
 import { BolaoParticipantesPage } from '../bolao-participantes/bolao-participantes';
 import { BolaoPalpitePage } from '../bolao-palpite/bolao-palpite';
