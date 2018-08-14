@@ -5,7 +5,7 @@ import { FirestoreServiceProvider } from '../../providers/firestore-service/fire
 import { CriarBolaoPage } from '../criar-bolao/criar-bolao';
 import { TabsbolaoPage } from '../tabsbolao/tabsbolao';
 import { LoginPage } from '../login/login';
-
+declare var db;
 /**
  * Generated class for the ListaBolaoPage page.
  *
@@ -27,23 +27,37 @@ export class ListaBolaoPage {
     public alertCtrl: AlertController,
     public authservice: AuthServiceProvider,
     public fireservice: FirestoreServiceProvider) {
+     /* db.collection("cities").where("state", "==", "CA")
+    .onSnapshot(function(querySnapshot) {
+        var cities = [];
+        querySnapshot.forEach(function(doc) {
+            cities.push(doc.data().name);
+        });
+        console.log("Current cities in CA: ", cities.join(", "));
+    });*/
   }
 
   criarBolao() {
-    this.navCtrl.push(CriarBolaoPage);
+    this.navCtrl.push(CriarBolaoPage.name);
   }
 
   carregarBoloes() {
+   
     this.meusboloes = new Array();
+    
     this.fireservice.receberTodosDocumentosColecao('bolao')
       .then((doc) => {
         this.fireservice.receberTodosDocumentosColecao('bolaoparticipantes')
           .then((participantes) => {
             for (const itembolao of doc) {
+              
               for (const participante of participantes) {
+                
                 if (itembolao.idBolao == participante.idBolao) {
+                  
                   itembolao['bolaoparticipantes'] = participante;
                   for (const item of itembolao.bolaoparticipantes.participantes) {
+
                     if (this.authservice.authState.uid == item.idUsuario && item.participando == true) {
                       itembolao['participando'] = true;
                     }
@@ -58,19 +72,24 @@ export class ListaBolaoPage {
   }
 
   selecionaBolao(bolao) {
-    this.navCtrl.push(TabsbolaoPage, { bolaoSelecionando: bolao });
+    this.navCtrl.push(TabsbolaoPage.name, { bolaoSelecionando: bolao });
   }
 
-  ionViewDidEnter() {
-    this.carregarBoloes();
+  ionViewDidLoad() {
+    if (this.authservice.authState == null) {
+      this.navCtrl.setRoot(LoginPage)
+    } else {
+      this.carregarBoloes();
+    }
   }
 
-  sair(){
+
+  sair() {
     this.authservice.signOut()
-    .then(
-      () => this.navCtrl.setRoot(LoginPage),
-      (error) => console.log(error)
-    );
+      .then(
+        () => this.navCtrl.setRoot(LoginPage),
+        (error) => console.log(error)
+      );
   }
 
   presentLoading(message) {

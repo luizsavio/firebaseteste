@@ -4,6 +4,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ListaBolaoPage } from '../lista-bolao/lista-bolao';
 import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -33,6 +34,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public authService: AuthServiceProvider,
     public firestoreService: FirestoreServiceProvider,
+    public storage: Storage,
     fb: FormBuilder
   ) {
     this.loginForm = fb.group({
@@ -69,11 +71,22 @@ export class LoginPage {
     this.authService.signInWithEmailAndPassword(data.email, data.password)
     .then((data) => {
       console.log('Dados usuario Login login', data);
-      this.navCtrl.setRoot(ListaBolaoPage);
+      this.navCtrl.setRoot(ListaBolaoPage.name);
       
     },
     (error) => this.presentLoading(error.message)
     );
+  }
+
+  ionViewDidEnter() {
+    this.storage.get("firebase:authUser:AIzaSyD1DKdKRfefkay1ibdXC9pN7TlTkjKmXVI:[DEFAULT]")
+      .then((resultado) => {
+        console.log('promise', resultado)
+        if (resultado != null){
+          this.authService.authState = resultado.value;
+          this.navCtrl.setRoot(ListaBolaoPage.name);
+        }
+      });
   }
 
   signUp() {
@@ -138,7 +151,7 @@ export class LoginPage {
           } 
         });
         console.log("Dados usuario Google login", user);
-        this.navCtrl.setRoot(ListaBolaoPage);
+        this.navCtrl.setRoot(ListaBolaoPage.name);
       },
       error => console.log(error.message)
     );

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '../../../node_modules/@angul
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FirestoreServiceProvider } from '../../providers/firestore-service/firestore-service';
 import { ListaBolaoPage } from '../lista-bolao/lista-bolao';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the CriarBolaoPage page.
@@ -34,14 +35,20 @@ export class CriarBolaoPage {
     this.criarForm = fb.group({
       nomeGravida: ['', Validators.compose([Validators.required])],
       dataPrevista: ['', Validators.compose([Validators.required])]
-    })
+    });
+  }
+
+  ionViewDidEnter() {
+    if (this.authService.authState == null){
+      this.navCtrl.setRoot(LoginPage)
+    }
   }
 
   criar() {
     let data = this.criarForm.value;
     var dataAux = new Date(data.dataPrevista);
     var dataLimite = dataAux;
-    dataLimite.setDate(dataAux.getDate() - 30);
+    dataLimite.setDate(dataAux.getDate() - 15);
     this.dataLimiteAposta = dataLimite.toISOString();
     //this.dataLimiteAposta = dataAux;
 
@@ -70,6 +77,7 @@ export class CriarBolaoPage {
               .then(() => {
                 console.log('bolaoparticipantes adicionado com sucesso.');
                 this.presentLoading('Bolão criado com sucesso!');
+                this.navCtrl.setRoot(ListaBolaoPage.name);
                 return;
               },
                 () => {
@@ -95,10 +103,7 @@ export class CriarBolaoPage {
         title: 'Alerta',
         subTitle: message,
         buttons: [{
-          text: 'Fechar',
-        handler: () => {
-          this.navCtrl.setRoot(ListaBolaoPage);
-        }
+          text: 'Fechar'
       }
     ]
       });
